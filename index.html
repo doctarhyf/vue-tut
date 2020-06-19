@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Product App</title>
+    <link rel="stylesheet" type="text/css" href="./css/uikit.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+</head>
+
+<body>
+
+    <div class="nav-bar">
+
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left">
+        
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">Active</a></li>
+                    <li>
+                        <a href="#">Parent</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">Item</a></li>
+                </ul>
+        
+            </div>
+        </nav>
+
+    </div>
+
+    <div id="app" class="uk-container uk-container-small ">
+        <div class="product">
+            <div class="product-image">
+                <img :src="image" uk-img>
+            </div>
+
+            <div class="product-info">
+                <h1>{{ title }}</h1>
+                <div>
+                <span v-if="inventory > 10" class="uk-label uk-label-success">In stock</span>
+                <span v-else-if="inventory <= 10 && inventory > 0"  class="uk-label uk-label-warning">Almost out of stock</span>
+                <span v-else  class="uk-label uk-label-danger">Out of stock</span>
+                </div>
+
+                <h5>Details</h5>
+
+                <ol class="uk-list uk-list-divider uk-list-striped">
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ol>
+
+                <h5>Colors</h5>
+
+                <div v-for="(variant, idx) in variants" 
+                     :key="variant.variantId"
+                     class="color-box"
+                     :style="{ backgroundColor: variant.variantColor }"
+                     @mouseover="updateProduct(idx)"
+                     >
+                   
+                </div>
+
+                <button @click="addToCart" 
+                        class="uk-button uk-button-primary"
+                        :disabled="inStock"
+                        >Add to Cart</button>
+
+                <div class="cart">
+                    <p>Cart({{ cart }})</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="./js/uikit.js"></script>
+    <script src="./js/uikit-icons.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>
