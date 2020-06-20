@@ -1,3 +1,5 @@
+Vue.config.devtools = true;
+
 Vue.component('product', {
     props: {
         premium: {
@@ -43,6 +45,8 @@ Vue.component('product', {
                 :disabled="!inStock"
                 >Add to Cart</button>
 
+
+        <product-review></product-review>
         
     </div>
 
@@ -98,6 +102,46 @@ Vue.component('product', {
         updateProduct(idx){
             this.selectedVariant = idx
             
+        }
+    }
+})
+
+Vue.component('product-review', {
+    template:`
+
+    <form class="review-form">
+
+        <p>
+            <label for="name">Name:</label>
+            <input id="name" v-model="name" >
+        </p>
+
+        <p>
+            <label for="review">Review:</label>
+            <textarea id="review"  v-model="review"></textarea>
+        </p>
+
+        <p>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+        </select>
+        </p>
+
+        <p>
+            <input type="submit" value="Submit" class="uk-button uk-button-primary">
+        </p>
+        </form>
+    `,
+    data() {
+        return {
+            name: null,
+            review: null,
+            rating: null
         }
     }
 })
